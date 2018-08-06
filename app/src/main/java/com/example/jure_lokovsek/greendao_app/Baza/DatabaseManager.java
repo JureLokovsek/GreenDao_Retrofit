@@ -13,19 +13,19 @@ import java.util.List;
 
 public class DatabaseManager {
 
-    static DaoSession mDaoSession;
-    static DaoMaster.DevOpenHelper daoMasterDevOpenHelper;
-    static DaoMaster daoMaster;
-    static SQLiteDatabase sqLiteDatabase;
-    Context context;
-    public static final boolean ENCRYPTED = false;
+    private static DaoSession mDaoSession;
+    private static DaoMaster.DevOpenHelper daoMasterDevOpenHelper;
+    private static DaoMaster daoMaster;
+    private static SQLiteDatabase sqLiteDatabase;
+    private Context context;
+    private static final boolean ENCRYPTED = false;
 
     public DatabaseManager(Context context) {
         this.context = context;
         setupDatabase();
     }
 
-    public void setupDatabase(){
+    private void setupDatabase(){
         daoMasterDevOpenHelper = new DaoMaster.DevOpenHelper(context, ENCRYPTED ? "notes-db-encrypted" : "notes-db");
         sqLiteDatabase = daoMasterDevOpenHelper.getWritableDatabase();
         daoMaster = new DaoMaster(sqLiteDatabase);
@@ -41,8 +41,7 @@ public class DatabaseManager {
     }
 
     public List<User> getUsers(){
-        List<User> users = mDaoSession.getUserDao().queryBuilder().where(UserDao.Properties.Year.eq(87)).list();
-        return users;
+        return mDaoSession.getUserDao().queryBuilder().where(UserDao.Properties.Year.eq(87)).list();
     }
 
     public int getSize(){
@@ -68,8 +67,21 @@ public class DatabaseManager {
         });
     }
 
+    public void saveNutrients(final List<Nutrient> seznam){
+        mDaoSession.runInTx(new Runnable() {
+            @Override
+            public void run() {
+                mDaoSession.getNutrientDao().insertInTx(seznam);
+            }
+        });
+    }
+
     public int getNuSize(){
         return mDaoSession.getNutrientDao().loadAll().size();
+    }
+
+    public void insertNu(Nutrient nutrient){
+        mDaoSession.getNutrientDao().insertInTx(nutrient);
     }
 
     public void deleteAllNu(){
@@ -82,6 +94,18 @@ public class DatabaseManager {
     // region Hello
 
     // endregion
+
+    public void deleteAllDaos(){
+        mDaoSession.runInTx(new Runnable() {
+            @Override
+            public void run() {
+                mDaoSession.getNutrientDao().deleteAll();
+                mDaoSession.getUserDao().deleteAll();
+                mDaoSession.getProduktDao().deleteAll();
+            }
+        });
+
+    }
 
 
 }

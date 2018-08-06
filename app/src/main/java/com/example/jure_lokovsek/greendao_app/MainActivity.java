@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.jure_lokovsek.greendao_app.Baza.DatabaseManager;
+import com.example.jure_lokovsek.greendao_app.DataBase.Nutrient;
 import com.example.jure_lokovsek.greendao_app.Interface.Api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,19 +30,23 @@ public class MainActivity extends Activity {
         context = MainActivity.this;
         databaseManager = new DatabaseManager(context);
 
-        databaseManager.add();
 
-        Log.d("size", "Size " + databaseManager.getSize());
+     //   databaseManager.add();
 
-        databaseManager.deleteAllUsers();
+      //  Log.d("user", "Size " + databaseManager.getSize());
 
-        Log.d("size", "Size " + databaseManager.getSize());
+       // databaseManager.deleteAllUsers();
+
+       // Log.d("user", "Size " + databaseManager.getSize());
         //
 
+
+        /*
         databaseManager.addNu();
         Log.d("nu", "Size " + databaseManager.getNuSize());
         databaseManager.deleteAllNu();
         Log.d("nu", "Size " + databaseManager.getNuSize());
+        */
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -51,17 +57,15 @@ public class MainActivity extends Activity {
         Api api = retrofit.create(Api.class);
 
 
-
-
-        /*
         Call<List<Nutrient>> call = api.getNutrient(2);
 
         call.enqueue(new Callback<List<Nutrient>>() {
             @Override
             public void onResponse(Call<List<Nutrient>> call, Response<List<Nutrient>> response) {
+                Log.d("nu", "Size Before " + databaseManager.getNuSize());
                 List<Nutrient> nutrients = response.body();
-             //  databaseManager.saveNutrients(nutrients);
-                Log.d("nu", "SIze " + nutrients.size());
+                databaseManager.saveNutrients(nutrients);
+                Log.d("nu", "Size After " + databaseManager.getNuSize());
             }
 
             @Override
@@ -70,10 +74,11 @@ public class MainActivity extends Activity {
             }
         });
 
-*/
+        Log.d("nu", "Size After" + databaseManager.getNuSize());
 
 
-      // Log.d("nSize", "Count " + databaseManager.getSizeNutrient());
+
+        databaseManager.deleteAllDaos();
 
     }
 }
