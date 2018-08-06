@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
 
 
 
-        databaseManager.deleteAllDaos();
+       // databaseManager.deleteAllDaos();
 
     }
 }
