@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.jure_lokovsek.greendao_app.DataBase.DaoMaster;
 import com.example.jure_lokovsek.greendao_app.DataBase.DaoSession;
+import com.example.jure_lokovsek.greendao_app.DataBase.Nutrient;
 import com.example.jure_lokovsek.greendao_app.DataBase.User;
 import com.example.jure_lokovsek.greendao_app.DataBase.UserDao;
 
@@ -57,7 +58,23 @@ public class DatabaseManager {
 
     // region Nutrient
 
+    public void addNu(){
+        mDaoSession.runInTx(new Runnable() {
+            @Override
+            public void run() {
+                mDaoSession.getNutrientDao().insert(new Nutrient("nutrient", "value", "unit"));
+                mDaoSession.getNutrientDao().insert(new Nutrient("nutrient", "value", "unit"));
+            }
+        });
+    }
 
+    public int getNuSize(){
+        return mDaoSession.getNutrientDao().loadAll().size();
+    }
+
+    public void deleteAllNu(){
+        mDaoSession.getNutrientDao().deleteAll();
+    }
 
 
     // endregion
@@ -65,8 +82,6 @@ public class DatabaseManager {
     // region Hello
 
     // endregion
-
-
 
 
 }

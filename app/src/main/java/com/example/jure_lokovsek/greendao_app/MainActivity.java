@@ -37,12 +37,20 @@ public class MainActivity extends Activity {
         Log.d("size", "Size " + databaseManager.getSize());
         //
 
+        databaseManager.addNu();
+        Log.d("nu", "Size " + databaseManager.getNuSize());
+        databaseManager.deleteAllNu();
+        Log.d("nu", "Size " + databaseManager.getNuSize());
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         Api api = retrofit.create(Api.class);
+
+
 
 
         /*
@@ -62,8 +70,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        */
-
+*/
 
 
       // Log.d("nSize", "Count " + databaseManager.getSizeNutrient());
