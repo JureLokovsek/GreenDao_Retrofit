@@ -8,9 +8,11 @@ import android.util.Log;
 import com.example.jure_lokovsek.greendao_app.Baza.DatabaseManager;
 import com.example.jure_lokovsek.greendao_app.DataBase.Nutrient;
 import com.example.jure_lokovsek.greendao_app.Interface.Api;
+import com.example.jure_lokovsek.greendao_app.Utility.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.DoubleUnaryOperator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,6 +81,10 @@ public class MainActivity extends Activity {
 
 
        // databaseManager.deleteAllDaos();
+
+        double vrednost = 12.5648484148474D;
+        Log.d("round", "Stara Vrednost "+ vrednost + " Nova Vrednost " + Utility.roundUpDoubleValue(vrednost,2));
+
 
     }
 }
