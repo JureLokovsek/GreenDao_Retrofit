@@ -79,12 +79,13 @@ public class MainActivity extends Activity {
         Log.d("nu", "Size After" + databaseManager.getNuSize());
 
 
-
        // databaseManager.deleteAllDaos();
 
         double vrednost = 12.5648484148474D;
-        Log.d("round", "Stara Vrednost "+ vrednost + " Nova Vrednost " + Utility.roundUpDoubleValue(vrednost,2));
+        Log.d("round", "Stara Vrednost "+ vrednost + " Nova Vrednost " + Utility.roundUpDoubleValue(vrednost,3));
 
 
+        // Timestamp compare
+      //  https://stackoverflow.com/questions/7913264/compare-two-timestamp-in-java
     }
 }
