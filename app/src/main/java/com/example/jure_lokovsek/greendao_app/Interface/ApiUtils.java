@@ -6,10 +6,10 @@ public class ApiUtils {
 
     public ApiUtils() {  }
 
-    public static RestApi getRestApi(String type){
-        if(type == ApiUtils.BASE_URL_NUTRIENT){
+    public static RestApi getRestApi(String tipPovezave){
+        if(tipPovezave == ApiUtils.BASE_URL_NUTRIENT){
             return RetrofitClient.getClient(BASE_URL_NUTRIENT).create(RestApi.class);
-        }else if(type == ApiUtils.BASE_URL_POSTS){
+        }else if(tipPovezave == ApiUtils.BASE_URL_POSTS){
             return RetrofitClient.getClient(BASE_URL_POSTS).create(RestApi.class);
         }
         return null;

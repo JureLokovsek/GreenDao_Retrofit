@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
         mDatabaseManager = new DatabaseManager(mContext);
-        mRestApi = ApiUtils.getRestApi(ApiUtils.BASE_URL_POSTS);
+        mRestApi = ApiUtils.getRestApi(ApiUtils.BASE_URL_NUTRIENT);
 
 
      //   databaseManager.add();
@@ -53,20 +53,14 @@ public class MainActivity extends Activity {
         */
 
 
-
-
-
-        /*
-
-        Call<List<Nutrient>> call = restApi.getNutrient(2);
-
-        call.enqueue(new Callback<List<Nutrient>>() {
+        mRestApi.getNutrient(2).enqueue(new Callback<List<Nutrient>>() {
             @Override
             public void onResponse(Call<List<Nutrient>> call, Response<List<Nutrient>> response) {
-                Log.d("nu", "Size Before " + databaseManager.getNuSize());
+               // Log.d("nu", "Size Before " + databaseManager.getNuSize());
                 List<Nutrient> nutrients = response.body();
-                databaseManager.saveNutrients(nutrients);
-                Log.d("nu", "Size After " + databaseManager.getNuSize());
+                //databaseManager.saveNutrients(nutrients);
+                Log.d("nut", "Size " + nutrients.size());
+               // Log.d("nu", "Size After " + databaseManager.getNuSize());
             }
 
             @Override
@@ -75,7 +69,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        Log.d("nu", "Size After" + databaseManager.getNuSize());
+      //  Log.d("nu", "Size After" + databaseManager.getNuSize());
 
 
 
@@ -87,10 +81,11 @@ public class MainActivity extends Activity {
 
         // Timestamp compare
       //  https://stackoverflow.com/questions/7913264/compare-two-timestamp-in-java
-      */
+
+
+
         /*
-        Call<List<Post>> call = restApi.get100Posts();
-        call.enqueue(new Callback<List<Post>>() {
+        mRestApi.get100Posts().enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 List<Post> posts = response.body();
@@ -99,7 +94,7 @@ public class MainActivity extends Activity {
                 for (Post post : posts) {
                     if (post.getUserid() == 2) {
                         users++;
-                        Log.d("post",  "USER ID " + posts.getUserid() + " POST ID " + posts.getId() + " TITLE " + posts.getTitle() + " BODY " + posts.getBody().substring(10));
+                        Log.d("post",  "USER ID " + post.getUserid() + " POST ID " + post.getId() + " TITLE " + post.getTitle() + " BODY " + post.getBody().substring(10));
                     }
                 }
                 Log.d("users", "Stevilo userjev " + users);
@@ -112,10 +107,10 @@ public class MainActivity extends Activity {
         });
         */
 
-/*
-        Call<List<Album>> call500Albums = restApi.get500Albums();
 
-        call500Albums.enqueue(new Callback<List<Album>>() {
+
+        /*
+        mRestApi.get500Albums().enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 List<Album> albumi = response.body();
@@ -133,7 +128,7 @@ public class MainActivity extends Activity {
         */
 
 
-
+/*
         mRestApi.getPostById(1).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
@@ -151,7 +146,7 @@ public class MainActivity extends Activity {
             }
         });
 
-
+        */
 
     }
 
