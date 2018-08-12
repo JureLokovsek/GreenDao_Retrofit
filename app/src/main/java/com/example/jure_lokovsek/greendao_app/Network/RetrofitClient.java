@@ -1,4 +1,4 @@
-package com.example.jure_lokovsek.greendao_app.Interface;
+package com.example.jure_lokovsek.greendao_app.Network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

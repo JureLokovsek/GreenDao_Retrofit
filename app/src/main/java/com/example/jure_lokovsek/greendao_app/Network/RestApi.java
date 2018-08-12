@@ -1,10 +1,10 @@
-package com.example.jure_lokovsek.greendao_app.Interface;
+package com.example.jure_lokovsek.greendao_app.Network;
 
 
 
-import com.example.jure_lokovsek.greendao_app.DataBase.Album;
+import com.example.jure_lokovsek.greendao_app.Network.RequestResponseObject.Album;
 import com.example.jure_lokovsek.greendao_app.DataBase.Nutrient;
-import com.example.jure_lokovsek.greendao_app.DataBase.Post;
+import com.example.jure_lokovsek.greendao_app.Network.RequestResponseObject.Post;
 
 import java.util.List;
 
@@ -32,6 +32,8 @@ public interface RestApi {
 
     @POST("posts")
     Call<ResponseBody> postDataPost(@Body Post post);
+
+
 
 
 }

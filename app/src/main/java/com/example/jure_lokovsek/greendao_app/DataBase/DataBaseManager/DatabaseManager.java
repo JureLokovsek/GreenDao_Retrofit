@@ -1,4 +1,4 @@
-package com.example.jure_lokovsek.greendao_app.Baza;
+package com.example.jure_lokovsek.greendao_app.DataBase.DataBaseManager;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

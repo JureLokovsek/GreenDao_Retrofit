@@ -5,20 +5,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.jure_lokovsek.greendao_app.Baza.DatabaseManager;
-import com.example.jure_lokovsek.greendao_app.DataBase.Album;
 import com.example.jure_lokovsek.greendao_app.DataBase.Nutrient;
-import com.example.jure_lokovsek.greendao_app.DataBase.Post;
-import com.example.jure_lokovsek.greendao_app.Interface.ApiUtils;
-import com.example.jure_lokovsek.greendao_app.Interface.RestApi;
+import com.example.jure_lokovsek.greendao_app.DataBase.DataBaseManager.DatabaseManager;
+import com.example.jure_lokovsek.greendao_app.Network.ApiUtils;
+import com.example.jure_lokovsek.greendao_app.Network.RequestResponseObject.Post;
+import com.example.jure_lokovsek.greendao_app.Network.RestApi;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends Activity {
 
@@ -32,7 +30,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
         mDatabaseManager = new DatabaseManager(mContext);
-        mRestApi = ApiUtils.getRestApi(ApiUtils.BASE_URL_NUTRIENT);
+        mRestApi = ApiUtils.getRestApi(ApiUtils.BASE_URL_POSTS);
 
 
      //   databaseManager.add();
@@ -53,13 +51,17 @@ public class MainActivity extends Activity {
         */
 
 
-        mRestApi.getNutrient(2).enqueue(new Callback<List<Nutrient>>() {
+        /*
+        mRestApi.getNutrient(1).enqueue(new Callback<List<Nutrient>>() {
             @Override
             public void onResponse(Call<List<Nutrient>> call, Response<List<Nutrient>> response) {
                // Log.d("nu", "Size Before " + databaseManager.getNuSize());
                 List<Nutrient> nutrients = response.body();
                 //databaseManager.saveNutrients(nutrients);
                 Log.d("nut", "Size " + nutrients.size());
+                for (Nutrient nutrient : nutrients) {
+                     Log.d("nu", "Nutriet " + nutrient.getNutrient() +" Value "+ nutrient.getValue());
+                }
                // Log.d("nu", "Size After " + databaseManager.getNuSize());
             }
 
@@ -68,6 +70,10 @@ public class MainActivity extends Activity {
                 Log.d("napaka", "Napaka " + t.getMessage());
             }
         });
+        */
+
+
+
 
       //  Log.d("nu", "Size After" + databaseManager.getNuSize());
 
@@ -84,7 +90,7 @@ public class MainActivity extends Activity {
 
 
 
-        /*
+/*
         mRestApi.get100Posts().enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -105,7 +111,9 @@ public class MainActivity extends Activity {
                 Log.d("error", "Napaka " + t.getMessage());
             }
         });
+
         */
+
 
 
 
@@ -145,8 +153,20 @@ public class MainActivity extends Activity {
 
             }
         });
-
         */
+
+        Post post = new Post(5, 2, "Title", "Body");
+        mRestApi.postDataPost(post).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("state", "Response " + response.raw());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("error", "Response Napaka " + t.getMessage());
+            }
+        });
 
     }
 

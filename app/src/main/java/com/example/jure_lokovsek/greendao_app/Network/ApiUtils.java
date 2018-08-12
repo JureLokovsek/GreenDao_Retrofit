@@ -1,4 +1,4 @@
-package com.example.jure_lokovsek.greendao_app.Interface;
+package com.example.jure_lokovsek.greendao_app.Network;
 
 public class ApiUtils {
     public static String BASE_URL_NUTRIENT ="http://buysellcattle.eu/";
